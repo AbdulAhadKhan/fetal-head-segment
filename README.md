@@ -1,2 +1,2 @@
-# fetal-head-segment
-Segment fetal head from images and videos
+# Fetal Head Segmentation
+Implimentation of a custom trained classification and segmentation algorithms
