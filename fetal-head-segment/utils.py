@@ -1,3 +1,5 @@
+import os
+
 import cv2
 import numpy as np
 
@@ -8,20 +10,30 @@ def prepare_for_prediction(image, dims):
     image = np.expand_dims(image, 0)
     return image
 
-def save_image():
-    pass
+def save_image(image, path):
+    cv2.imwrite(path, image)
 
-def dir_exists():
-    pass
+def path_exists(path):
+    return os.path.exists(path)
 
-def make_dir():
-    pass
+def make_dir(path, dir_name):
+    path = os.path.join(path, dir_name)
+    if not path_exists(path):
+        os.mkdir(path)
+        return path
+    raise Exception(f'The path {path} already exists')
 
-def path_exists():
-    pass
+def path_type(path):
+    if os.path.isdir(path):
+        return 'dir'
+    if os.path.isfile(path):
+        return path.split('.')[-1]
+    raise Exception(f'Could not process \'{path}\'. Check if path exists')
 
-def path_type():
-    pass
-
-def yes_no():
-    pass
+def yes_no(question):
+    print(question)
+    res = input('[yes/no]')
+    if not isinstance(res, str):
+        raise Exception('Invalid input type')
+    res = res.lower()[0]
+    return True if res == 'y' else False if res == 'n' else yes_no(question)
