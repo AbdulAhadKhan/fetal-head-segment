@@ -1,6 +1,7 @@
 import ntpath
 
 import cv2
+from utils import save_image
 from predict import Predictor
 from __main__ import __file__
 
@@ -20,6 +21,6 @@ class Image:
     def show(self):
         image = self.predictor.process_image(self.image)
         if self.predictor.image_class == 'Head' and self.save:
-            cv2.imwrite(f'{self.save_dir}/{self.fname}.png', image)
+            save_image(image, f'{self.save_dir}/{self.fname}.png')
         cv2.imshow(__file__, image)
         cv2.waitKey()
