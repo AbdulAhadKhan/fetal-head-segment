@@ -1,3 +1,5 @@
+from parser import Parser
+
 class Command:
     def __init__(self):
         self.args = self._get_arguments()
