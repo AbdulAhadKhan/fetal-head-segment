@@ -1,25 +1,22 @@
+import yaml
 from parser import Parser
 
-class Command:
-    def __init__(self):
-        self.args = self._get_arguments()
-        self.settings = self._get_settings()
-        self.mode = self._get_mode()
+def _get_mode():
+    pass
 
-    def _get_arguments(self):
-        pass
+def _test_arguments():
+    pass
 
-    def _get_mode(self):
-        pass
+def _get_configs():
+    with open('./config.yaml', 'r') as file:
+        return yaml.safe_load(file)
 
-    def _test_arguments(self):
-        pass
+def _mode_sequence():
+    pass
 
-    def _get_settings(self):
-        pass
-
-    def _mode_sequence(self):
-        pass
-
-    def execute(self):
-        pass
+def execute():
+    parser = Parser()
+    args = parser.get_arguments()
+    config = _get_configs()
+    mode = _get_mode(args)
+    _mode_sequence(mode, config)
