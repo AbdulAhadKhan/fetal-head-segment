@@ -2,10 +2,11 @@ import pickle
 import numpy as np
 
 from keras.models import load_model
+from keras.initializers import glorot_normal
 
 class Classifier:
     def __init__(self, model_path, class_dict_path, thresh=0.85):
-        self.model = load_model(model_path)
+        self.model = load_model(model_path, custom_objects={'GlorotUniform'})
         self.class_dict = self._load_class_dict(class_dict_path)
         self.thresh = thresh
 
