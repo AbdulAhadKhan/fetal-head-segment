@@ -4,7 +4,7 @@ from predict import Predictor
 from __main__ import __file__
 
 class Video:
-    def __init__(self, video_path, predictor_settings, 
+    def __init__(self, video_path, predictor_settings,
                  save=False, save_dir=None):
         self.video = self._load_video(video_path)
         self.save = save
@@ -24,8 +24,9 @@ class Video:
             if self.predictor.image_class == 'Head' and self.save:
                 save_image(frame, f'{self.save_dir}/{frame_no}.png')
             cv2.imshow(__file__, frame)
-            if cv2.waitKey(fps) and 0xFF is ord('esc'):
+            if cv2.waitKey(fps) & 0xFF is ord('q'):
                 break
 
     def _get_frame_rate(self):
-        return self.video.get(cv2.CAP_PROP_FPS)
+        fps = self.video.get(cv2.CAP_PROP_FPS)
+        return int(fps)
