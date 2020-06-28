@@ -22,7 +22,7 @@ class Video:
             frame = self.video.read()[1]
             frame = self.predictor.process_image(frame)
             if self.predictor.image_class == 'Head' and self.save:
-                save_image(image, f'{self.save_dir}/{frame_no}.png')
+                save_image(frame, f'{self.save_dir}/{frame_no}.png')
             cv2.imshow(__file__, frame)
             if cv2.waitKey(fps) and 0xFF is ord('esc'):
                 break
