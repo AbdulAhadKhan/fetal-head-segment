@@ -1,12 +1,15 @@
 import cv2
 from keras.models import load_model
+from segmentor.dice_coef_loss import dice_coef_loss
 
 class Segmentor:
     def __init__(self, model_path, custom_objects=None):
         self.model = self.get_model(model_path, custom_objects)
 
     @staticmethod
-    def get_model(model_path, custom_objects):
+    def get_model(model_path, custom_objects=None):
+        if custom_objects is None:
+            custom_objects = {'dice_coef_loss': dice_coef_loss}
         return load_model(model_path, custom_objects=custom_objects)
 
     @staticmethod
