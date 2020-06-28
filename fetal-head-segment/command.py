@@ -1,6 +1,8 @@
 class Command:
     def __init__(self):
-        pass
+        self.args = self._get_arguments()
+        self.settings = self._get_settings()
+        self.mode = self._get_mode()
 
     def _get_arguments(self):
         pass

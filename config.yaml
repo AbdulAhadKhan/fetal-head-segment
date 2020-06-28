@@ -1,0 +1,12 @@
+segmentor:
+  path: './models/segmentor/two_ds_DICE.h5'
+  custom-obj: './models/segmentor/dice_coef_loss.py'
+  indims:
+    - 80
+    - 128
+classifier: 
+  path: './models/classifier/basic_model_rescaled.h5'
+  classes: './models/classifier/classes.pickle'
+  indims:
+    - 200
+    - 200

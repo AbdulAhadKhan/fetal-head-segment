@@ -4,7 +4,7 @@ from predict import Predictor
 from __main__ import __file__
 
 class Video:
-    def __init__(self, video_path, predictor_settings, 
+    def __init__(self, video_path, predictor_settings,
                  save=False, save_dir=None):
         self.video = self._load_video(video_path)
         self.save = save
