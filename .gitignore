@@ -131,4 +131,5 @@ dmypy.json
 # Miscellaneous
 .pylintrc
 .vscode/
-*.pickle
+ignore/
+models/
