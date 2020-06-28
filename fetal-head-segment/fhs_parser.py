@@ -14,4 +14,4 @@ class Parser:
                                 help='Used with -o, make subdir with specified output directory')
 
     def get_arguments(self):
-        return dict(self._args)
+        return vars(self._args)
