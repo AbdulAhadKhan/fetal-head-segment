@@ -19,7 +19,7 @@ class Classifier:
         return self.prob_to_class(probs)
 
     def get_probabilites(self, image):
-        return self.model.predict(image)
+        return self.model.predict(image)[0]
 
     def prob_to_class(self, probs):
         index = np.argmax(probs)
