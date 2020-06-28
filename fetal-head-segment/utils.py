@@ -20,8 +20,7 @@ def make_dir(path, dir_name):
     path = os.path.join(path, dir_name)
     if not path_exists(path):
         os.mkdir(path)
-        return path
-    raise Exception(f'The path {path} already exists')
+    return path
 
 def path_type(path):
     if os.path.isdir(path):
