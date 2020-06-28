@@ -4,7 +4,6 @@ class Parser:
     def __init__(self):
         self._args = argparse.ArgumentParser()
 
-    def initialize_arguments(self):
         self._args.add_argument('path', type=str, help='Path to video/image file')
         self._args.add_argument('-i', '--image', action='store_false',
                                 help='Specify this option if input is an image')
