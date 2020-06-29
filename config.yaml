@@ -2,7 +2,7 @@ segmentor_path: './models/segmentor/two_ds_DICE.h5'
 segmentor_indims:
     - 80
     - 128
-classifier_path: './models/classifier/basic_model_rescaled.h5'
+classifier_path: './models/classifier/naive_model_basic.h5'
 classifier_indims:
   - 200
   - 200
