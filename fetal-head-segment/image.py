@@ -30,4 +30,5 @@ class Image:
         cv2.waitKey()
 
     def _get_dims(self):
-        return self.image.shape[:2]
+        height, width = self.image.shape[:2]
+        return width, height
