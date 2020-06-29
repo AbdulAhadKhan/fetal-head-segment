@@ -1,5 +1,6 @@
 import cv2
 from utils import save_image
+from utils import embed_class
 from predict import Predictor
 from __main__ import __file__
 
@@ -25,7 +26,7 @@ class Video:
             if self.predictor.image_class == 'Head' and self.save:
                 save_image(frame, f'{self.save_dir}/{frame_no}.png')
             frame = cv2.resize(frame, dims, cv2.INTER_NEAREST)
-            frame = self._embed_class(frame)
+            frame = embed_class(frame, self.predictor.image_class)
             cv2.imshow(__file__, frame)
             if cv2.waitKey(fps) & 0xFF is ord('q'):
                 break
@@ -39,8 +40,3 @@ class Video:
         width = self.video.get(cv2.CAP_PROP_FRAME_WIDTH)
         return int(width), int(height)
 
-    def _embed_class(self, frame):
-        image = cv2.putText(frame, self.predictor.image_class,
-                            (50, 50), cv2.FONT_HERSHEY_COMPLEX,
-                            1, (0, 0, 255), 1, cv2.LINE_AA)
-        return image

@@ -36,3 +36,9 @@ def yes_no(question):
         raise Exception('Invalid input type')
     res = res.lower()[0]
     return True if res == 'y' else False if res == 'n' else yes_no(question)
+
+def embed_class(frame, text):
+    image = cv2.putText(frame, text,
+                        (50, 50), cv2.FONT_HERSHEY_COMPLEX,
+                        1, (0, 0, 255), 1, cv2.LINE_AA)
+    return image
