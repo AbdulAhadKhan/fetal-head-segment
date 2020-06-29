@@ -26,11 +26,7 @@ def _get_configs():
         return yaml.safe_load(file)
 
 def _mode_sequence(args, save_mode, save_dir, config):
-<<<<<<< HEAD
     if file_type(args['path']) == 'image':
-=======
-    if args['image']:
->>>>>>> command
         im_predictor = Image(args['path'],
                              config,
                              save_mode,
