@@ -4,6 +4,7 @@ import yaml
 from fhs_parser import Parser
 from utils import path_exists
 from utils import make_dir
+from utils import file_type
 
 from image import Image
 from video import Video
@@ -25,13 +26,13 @@ def _get_configs():
         return yaml.safe_load(file)
 
 def _mode_sequence(args, save_mode, save_dir, config):
-    if args['image']:
+    if file_type(args['path']) == 'image':
         im_predictor = Image(args['path'],
                              config,
                              save_mode,
                              save_dir)
         im_predictor.show()
-    else:
+    elif file_type(args['path']) == 'video':
         vid_predictor = Video(args['path'],
                               config,
                               save_mode,
