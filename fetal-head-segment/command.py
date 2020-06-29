@@ -15,7 +15,7 @@ def _test_arguments(args):
     if not path_exists(args['path']):
         print('Input path does not exist')
         return False
-    if args['output'] is not None and path_exists(args['output']):
+    if args['output'] is not None and not path_exists(args['output']):
         print('Output path does not exist')
         return False
     return True
