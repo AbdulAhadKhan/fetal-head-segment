@@ -9,13 +9,13 @@ from image import Image
 from video import Video
 
 def _get_save_mode(args):
-    return args['o'] is not None
+    return args['output'] is not None
 
 def _test_arguments(args):
     if not path_exists(args['path']):
         print('Input path does not exist')
         return False
-    if args['o'] is not None and path_exists(args['o']):
+    if args['output'] is not None and not path_exists(args['output']):
         print('Output path does not exist')
         return False
     return True
@@ -25,7 +25,7 @@ def _get_configs():
         return yaml.safe_load(file)
 
 def _mode_sequence(args, save_mode, save_dir, config):
-    if args['i']:
+    if args['image']:
         im_predictor = Image(args['path'],
                              config,
                              save_mode,
@@ -48,8 +48,8 @@ def execute():
     config = _get_configs()
     save_mode = _get_save_mode(args)
 
-    save_dir = args['o']
-    if args['s'] is not None:
-        save_dir = make_dir(args['o'], args['s'])
+    save_dir = args['output']
+    if args['subdir'] is not None:
+        save_dir = make_dir(args['output'], args['subdir'])
 
     _mode_sequence(args, save_mode, save_dir, config)
