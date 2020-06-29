@@ -1,4 +1,6 @@
 import cv2
+import numpy as np
+from PIL import Image, ImageFilter, ImageOps
 from keras.models import load_model
 from segmentor.dice_coef_loss import dice_coef_loss
 
@@ -13,22 +15,23 @@ class Segmentor:
         return load_model(model_path, custom_objects=custom_objects)
 
     @staticmethod
-    def mask_contour(mask):
-        thresh = cv2.threshold(mask, 0.8, 1, cv2.THRESH_BINARY)[1]
-        thresh = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        thresh = thresh[0] if len(thresh) == 2 else thresh[1]
-        return thresh
+    def drawContour(m, s, c, RGB):
+        thisContour = s.point(lambda p: p == c and 255)
+        thisEdges = thisContour.filter(ImageFilter.FIND_EDGES)
+        thisEdgesN = np.array(thisEdges)
+        m[np.nonzero(thisEdgesN)] = RGB
+        return m
 
-    @staticmethod
-    def embed_mask(image, mask):
-        for c in mask:
-            cv2.drawContours(image, [c], -1, (255, 0, 0), thickness=1)
-        return image
+    def embed_mask(self, image, mask):
+        mask = Image.fromarray(np.uint8(mask*255)).convert('L')
+        mask = ImageOps.invert(mask)
+        image = cv2.cvtColor(image[0], cv2.COLOR_GRAY2BGR)
+        masked = self.drawContour(image, mask, 0, (0, 255, 255))
+        return masked
 
     def segment_image(self, image):
         mask = self.get_mask(image)
         return self.embed_mask(image, mask)
 
     def get_mask(self, image):
-        mask = self.model.predict(image)[0][:, :, 0]
-        return self.mask_contour(mask)
+        return self.model.predict(image)[0][:, :, 0]
