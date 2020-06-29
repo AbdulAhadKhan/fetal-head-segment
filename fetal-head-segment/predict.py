@@ -10,7 +10,7 @@ class Predictor:
                  classifier_indims,
                  class_dict_path):
         self.segmentor = Segmentor(segmentor_path)
-        self.segmentor_indims = segmentor_indims
+        self.segmentor_indims = tuple(segmentor_indims)
         self.classifier = Classifier(classifier_path, class_dict_path)
         self.classifier_indims = tuple(classifier_indims)
         self.image_class = ''
