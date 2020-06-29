@@ -39,4 +39,3 @@ class Video:
         height = self.video.get(cv2.CAP_PROP_FRAME_HEIGHT)
         width = self.video.get(cv2.CAP_PROP_FRAME_WIDTH)
         return int(width), int(height)
-
