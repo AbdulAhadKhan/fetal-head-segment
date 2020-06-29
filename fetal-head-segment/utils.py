@@ -1,7 +1,9 @@
+import sys
 import os
 
 import cv2
 import numpy as np
+import filetype
 
 def prepare_for_prediction(image, dims):
     image = cv2.resize(image, dims, cv2.INTER_NEAREST)
@@ -15,6 +17,15 @@ def save_image(image, path):
 
 def path_exists(path):
     return os.path.exists(path)
+
+def file_type(path):
+    try:
+        ftype = filetype.guess(path).mime
+        ftype = ftype.split('/')[0]
+        return ftype
+    except IsADirectoryError:
+        print(f'{path} is a directory')
+        sys.exit(1)
 
 def make_dir(path, dir_name):
     path = os.path.join(path, dir_name)
