@@ -132,5 +132,4 @@ dmypy.json
 .pylintrc
 .vscode/
 ignore/
-models/
 tmp.*
